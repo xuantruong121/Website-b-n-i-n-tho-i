@@ -1,0 +1,41 @@
+@model QLBH_64131491.Models.Model_64131491.LoaiSanPham_64131491
+@{
+    ViewData["Title"] = "Thêm loại sản phẩm";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container">
+    <h2 class="mb-4">Thêm loại sản phẩm</h2>
+    
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            <ul>
+                @foreach (var modelError in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <li>@modelError.ErrorMessage</li>
+                }
+            </ul>
+        </div>
+    }
+    
+    <form asp-action="Create" method="post">
+        <div class="mb-3">
+            <label asp-for="MaLSP" class="form-label">Mã loại sản phẩm</label>
+            <input asp-for="MaLSP" class="form-control" required />
+            <span asp-validation-for="MaLSP" class="text-danger"></span>
+            <div class="form-text">Mã loại sản phẩm phải là duy nhất</div>
+        </div>
+        <div class="mb-3">
+            <label asp-for="TenLSP" class="form-label">Tên loại sản phẩm</label>
+            <input asp-for="TenLSP" class="form-control" required />
+            <span asp-validation-for="TenLSP" class="text-danger"></span>
+        </div>
+        <div class="mt-4 text-end">
+            <a asp-controller="Smartphone" asp-action="AdminIndex" class="btn btn-secondary">Quay lại</a>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Lưu</button>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} 

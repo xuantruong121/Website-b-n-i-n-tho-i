@@ -1,0 +1,33 @@
+@model QLBH_64131491.Models.Model_64131491.LoaiSanPham_64131491
+@{
+    ViewData["Title"] = "Xóa loại sản phẩm";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container">
+    <h2 class="mb-4 text-danger">Xác nhận xóa loại sản phẩm</h2>
+    <div class="alert alert-warning">
+        <strong>Bạn có chắc chắn muốn xóa loại sản phẩm sau?</strong>
+    </div>
+    <dl class="row">
+        <dt class="col-sm-3">Mã loại</dt>
+        <dd class="col-sm-9">@Model.MaLSP</dd>
+        <dt class="col-sm-3">Tên loại sản phẩm</dt>
+        <dd class="col-sm-9">@Model.TenLSP</dd>
+    </dl>
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <div>@error.ErrorMessage</div>
+            }
+        </div>
+    }
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="MaLSP" />
+        <div class="mt-4 text-end">
+            <a asp-action="Index" class="btn btn-secondary">Huỷ</a>
+            <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i> Xóa</button>
+        </div>
+    </form>
+</div> 

@@ -1,0 +1,22 @@
+@model QLBH_64131491.Models.Model_64131491.NhanVien_64131491
+@{
+    ViewData["Title"] = "Chi tiết nhân viên";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container">
+    <h2 class="mb-4">Chi tiết nhân viên</h2>
+    <dl class="row">
+        <dt class="col-sm-3">Mã nhân viên</dt>
+        <dd class="col-sm-9">@Model.MaNV</dd>
+        <dt class="col-sm-3">Họ tên</dt>
+        <dd class="col-sm-9">@Model.HoTen</dd>
+        <dt class="col-sm-3">Số điện thoại</dt>
+        <dd class="col-sm-9">@Model.SoDienThoai</dd>
+        <dt class="col-sm-3">Email</dt>
+        <dd class="col-sm-9">@Model.Email</dd>
+        <dt class="col-sm-3">Quyền sử dụng</dt>
+        <dd class="col-sm-9">@Model.QuyenSuDung</dd>
+    </dl>
+    <a asp-action="Edit" asp-route-id="@Model.MaNV" class="btn btn-warning">Sửa</a>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</div> 

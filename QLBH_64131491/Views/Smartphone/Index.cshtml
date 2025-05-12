@@ -1,0 +1,140 @@
+@model IEnumerable<QLBH_64131491.Models.Model_64131491.Smartphone_64131491>
+
+@{
+    ViewData["Title"] = "Danh sách sản phẩm";
+}
+@Html.AntiForgeryToken()
+
+<div class="container">
+    <h1 class="mb-4">Danh sách sản phẩm</h1>
+
+    <!-- Search Form -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form asp-action="Search" method="get" class="row g-3">
+                <div class="col-md-4">
+                    <input type="text" id="searchString" name="searchString" class="form-control" placeholder="Tìm kiếm..." value="@ViewBag.SearchString">
+                </div>
+                <div class="col-md-3">
+                    <select id="brand" name="brand" class="form-select">
+                        <option value="">Tất cả thương hiệu</option>
+                        @foreach (var brand in ViewBag.Brands)
+                        {
+                            <option value="@brand" selected="@(brand == ViewBag.SelectedBrand)">@brand</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <input type="number" id="minPrice" name="minPrice" class="form-control" placeholder="Giá từ" value="@ViewBag.MinPrice">
+                </div>
+                <div class="col-md-2">
+                    <input type="number" id="maxPrice" name="maxPrice" class="form-control" placeholder="Giá đến" value="@ViewBag.MaxPrice">
+                </div>
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-primary w-100">Tìm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col">
+                <div class="card h-100 product-card">
+                    @if (item.DiscountPrice.HasValue && item.DiscountPrice.Value > 0 && item.DiscountPrice.Value < item.Price)
+                    {
+                        var discountPercent = Math.Round((item.Price - item.DiscountPrice.Value) / item.Price * 100);
+                        <div class="discount-badge">
+                            @discountPercent% OFF
+                        </div>
+                    }
+                    <img src="@Url.Content(item.ImageUrl)" 
+                         class="card-img-top product-image" 
+                         alt="@item.Brand @item.Model"
+                         onerror="this.src='/images/smartphones/default-smartphone.webp'" 
+                         style="height: 250px; width: auto; max-width: 100%; object-fit: contain; padding: 15px; margin: auto; display: block;">
+                    <div class="card-body">
+                        <h5 class="card-title product-title">@item.Brand @item.Model</h5>
+                        <p class="card-text">
+                            @if (item.DiscountPrice.HasValue && item.DiscountPrice.Value > 0)
+                            {
+                                <span class="price">@item.DiscountPrice.Value.ToString("N0") đ</span>
+                                <span class="original-price">@item.Price.ToString("N0") đ</span>
+                            }
+                            else
+                            {
+                                <span class="price">@item.Price.ToString("N0") đ</span>
+                            }
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary">Chi tiết</a>
+                            @if (item.InStock)
+                            {
+                                <button onclick="addToCart('@item.Id')" class="btn btn-primary">
+                                    <i class="bi bi-cart-plus"></i> Thêm vào giỏ
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-secondary" disabled>Hết hàng</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function addToCart(smartphoneId) {
+            const quantity = 1;
+            $.ajax({
+                url: '/Cart/AddToCart',
+                type: 'POST',
+                data: {
+                    smartphoneId: smartphoneId,
+                    quantity: quantity,
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                },
+                success: function (result) {
+                    if (result.success) {
+                        updateCartBadge(result.cartCount);
+                        showBootstrapToast('Đã thêm sản phẩm vào giỏ hàng!', 'success');
+                    }
+                },
+                error: function (xhr) {
+                    if (xhr.status === 401) {
+                        showBootstrapToast('Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng!', 'danger');
+                        window.location.href = '/Account/Login';
+                    } else {
+                        showBootstrapToast('Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng!', 'danger');
+                    }
+                }
+            });
+        }
+        function updateCartBadge(count) {
+            let badge = document.getElementById('cartCount');
+            if (!badge) {
+                const cartIcon = document.getElementById('cart-icon');
+                badge = document.createElement('span');
+                badge.id = 'cartCount';
+                badge.className = 'badge bg-danger ms-1';
+                cartIcon.parentNode.appendChild(badge);
+            }
+            badge.textContent = count;
+            badge.style.display = count > 0 ? 'inline-block' : 'none';
+        }
+        // Tải số lượng giỏ hàng khi load trang
+        $(document).ready(function() {
+            $.get('/Cart/GetCartCount', function(data) {
+                if (data.cartCount !== undefined) {
+                    updateCartBadge(data.cartCount);
+                }
+            });
+        });
+    </script>
+} 

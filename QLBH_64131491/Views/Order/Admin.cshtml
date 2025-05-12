@@ -1,0 +1,180 @@
+@model IEnumerable<QLBH_64131491.Models.Model_64131491.Order_64131491>
+@{
+    ViewData["Title"] = "Quản lý đơn hàng";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var processingOrders = Model?.Where(o => o.IsProcessing && !o.IsCompleted && !o.IsCancelled).ToList() ?? new List<QLBH_64131491.Models.Model_64131491.Order_64131491>();
+    var shippingOrders = Model?.Where(o => o.IsShipped && !o.IsCompleted && !o.IsCancelled).ToList() ?? new List<QLBH_64131491.Models.Model_64131491.Order_64131491>();
+    var finishedOrders = Model?.Where(o => o.IsCompleted || o.IsCancelled).ToList() ?? new List<QLBH_64131491.Models.Model_64131491.Order_64131491>();
+}
+<div class="container">
+    <h2 class="mb-4">Quản lý đơn hàng</h2>
+    <div class="row g-4">
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-header bg-warning text-dark"><b>Đơn đang xử lý</b></div>
+                <div class="card-body">
+                    @if (processingOrders.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover align-middle">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Mã đơn hàng</th>
+                                        <th>Khách hàng</th>
+                                        <th>Ngày đặt</th>
+                                        <th>Địa chỉ giao hàng</th>
+                                        <th>Phương thức thanh toán</th>
+                                        <th>Thành tiền</th>
+                                        <th>Nhân viên xử lý</th>
+                                        <th>Ghi chú</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in processingOrders)
+                                    {
+                                        <tr>
+                                            <td>@item.OrderId</td>
+                                            <td>@(item.KhachHang?.HoTen ?? item.MaKH)</td>
+                                            <td>@item.OrderDate.ToString("dd/MM/yyyy HH:mm")</td>
+                                            <td>@(item.ShippingAddress ?? "")</td>
+                                            <td>@(item.PaymentMethod ?? "")</td>
+                                            <td>@(item.FinalAmount?.ToString("#,##0") ?? "0") đ</td>
+                                            <td>@(item.NhanVien?.HoTen ?? item.MaNVXuLy ?? "")</td>
+                                            <td>@(item.Notes ?? "")</td>
+                                            <td>
+                                                <a asp-action="AdminDetails" asp-route-id="@item.OrderId" class="btn btn-info btn-sm" title="Xem chi tiết"><i class="bi bi-eye"></i></a>
+                                                <form asp-action="UpdateStatus" method="post" style="display:inline;">
+                                                    <input type="hidden" name="id" value="@item.OrderId" />
+                                                    <input type="hidden" name="status" value="shipped" />
+                                                    <button type="submit" class="btn btn-success btn-sm" title="Xác nhận giao hàng"><i class="bi bi-truck"></i> Xác nhận giao</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info text-center">Không có đơn nào đang xử lý.</div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-header bg-info text-dark"><b>Đơn đang giao hàng</b></div>
+                <div class="card-body">
+                    @if (shippingOrders.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover align-middle">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Mã đơn hàng</th>
+                                        <th>Khách hàng</th>
+                                        <th>Ngày đặt</th>
+                                        <th>Địa chỉ giao hàng</th>
+                                        <th>Phương thức thanh toán</th>
+                                        <th>Thành tiền</th>
+                                        <th>Nhân viên xử lý</th>
+                                        <th>Ghi chú</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in shippingOrders)
+                                    {
+                                        <tr>
+                                            <td>@item.OrderId</td>
+                                            <td>@(item.KhachHang?.HoTen ?? item.MaKH)</td>
+                                            <td>@item.OrderDate.ToString("dd/MM/yyyy HH:mm")</td>
+                                            <td>@(item.ShippingAddress ?? "")</td>
+                                            <td>@(item.PaymentMethod ?? "")</td>
+                                            <td>@(item.FinalAmount?.ToString("#,##0") ?? "0") đ</td>
+                                            <td>@(item.NhanVien?.HoTen ?? item.MaNVXuLy ?? "")</td>
+                                            <td>@(item.Notes ?? "")</td>
+                                            <td>
+                                                <a asp-action="AdminDetails" asp-route-id="@item.OrderId" class="btn btn-info btn-sm" title="Xem chi tiết"><i class="bi bi-eye"></i></a>
+                                                <form asp-action="UpdateStatus" method="post" style="display:inline;">
+                                                    <input type="hidden" name="id" value="@item.OrderId" />
+                                                    <input type="hidden" name="status" value="completed" />
+                                                    <button type="submit" class="btn btn-primary btn-sm" title="Xác nhận hoàn thành"><i class="bi bi-check-circle"></i> Hoàn thành</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info text-center">Không có đơn nào đang giao hàng.</div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white"><b>Đơn đã hoàn thành/đã hủy</b></div>
+                <div class="card-body">
+                    @if (finishedOrders.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover align-middle">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Mã đơn hàng</th>
+                                        <th>Khách hàng</th>
+                                        <th>Ngày đặt</th>
+                                        <th>Địa chỉ giao hàng</th>
+                                        <th>Phương thức thanh toán</th>
+                                        <th>Trạng thái</th>
+                                        <th>Thành tiền</th>
+                                        <th>Nhân viên xử lý</th>
+                                        <th>Ghi chú</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in finishedOrders)
+                                    {
+                                        <tr>
+                                            <td>@item.OrderId</td>
+                                            <td>@(item.KhachHang?.HoTen ?? item.MaKH)</td>
+                                            <td>@item.OrderDate.ToString("dd/MM/yyyy HH:mm")</td>
+                                            <td>@(item.ShippingAddress ?? "")</td>
+                                            <td>@(item.PaymentMethod ?? "")</td>
+                                            <td>
+                                                @if (item.IsCompleted)
+                                                {
+                                                    <span class="badge bg-success">Hoàn thành</span>
+                                                }
+                                                else if (item.IsCancelled)
+                                                {
+                                                    <span class="badge bg-danger">Đã hủy</span>
+                                                }
+                                            </td>
+                                            <td>@(item.FinalAmount?.ToString("#,##0") ?? "0") đ</td>
+                                            <td>@(item.NhanVien?.HoTen ?? item.MaNVXuLy ?? "")</td>
+                                            <td>@(item.Notes ?? "")</td>
+                                            <td>
+                                                <a asp-action="AdminDetails" asp-route-id="@item.OrderId" class="btn btn-info btn-sm" title="Xem chi tiết"><i class="bi bi-eye"></i></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info text-center">Không có đơn nào đã hoàn thành hoặc đã hủy.</div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

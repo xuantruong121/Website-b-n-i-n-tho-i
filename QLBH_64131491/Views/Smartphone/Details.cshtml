@@ -1,0 +1,147 @@
+@model QLBH_64131491.Models.Model_64131491.Smartphone_64131491
+
+@{
+    ViewData["Title"] = $"Chi tiết sản phẩm {Model.Brand} {Model.Model}";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="product-image-container" style="max-width: 530px; max-height: 530px; margin: 0 auto;">
+                @if (Model.ProductImages != null && Model.ProductImages.Any())
+                {
+                    <div id="carouselImages" class="carousel slide mb-3" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            @for (int i = 0; i < Model.ProductImages.Count; i++)
+                            {
+                                var img = Model.ProductImages.ElementAt(i);
+                                <div class="carousel-item @(i == 0 ? "active" : "")">
+                                    <img src="@img.ImageUrl" class="d-block w-100" alt="@Model.Model" 
+                                         style="max-height: 500px; object-fit: contain; margin: auto;">
+                                </div>
+                            }
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselImages" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
+                }
+                else
+                {
+                    <div class="text-center">
+                        <img src="@Model.ImageUrl" class="img-fluid mb-3" alt="@Model.Model" 
+                             style="max-height: 500px; max-width: 100%; object-fit: contain;">
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h2>@Model.Brand @Model.Model</h2>
+            <p>@Model.Description</p>
+            <ul class="list-group mb-3">
+                <li class="list-group-item">
+                    <strong>Giá:</strong> 
+                    @if (Model.DiscountPrice.HasValue && Model.DiscountPrice.Value > 0)
+                    {
+                        <span class="price">@Model.DiscountPrice.Value.ToString("N0") đ</span>
+                        <span class="original-price">@Model.Price.ToString("N0") đ</span>
+                    }
+                    else
+                    {
+                        <span class="price">@Model.Price.ToString("N0") đ</span>
+                    }
+                </li>
+                <li class="list-group-item"><strong>Màu sắc:</strong> @Model.Color</li>
+                <li class="list-group-item"><strong>Bộ nhớ:</strong> @Model.StorageGB GB</li>
+                <li class="list-group-item"><strong>RAM:</strong> @Model.RAM</li>
+                <li class="list-group-item"><strong>CPU:</strong> @Model.Processor</li>
+                <li class="list-group-item"><strong>Camera:</strong> @Model.Camera</li>
+                <li class="list-group-item"><strong>Pin:</strong> @Model.Battery</li>
+                <li class="list-group-item"><strong>Kích thước màn hình:</strong> @Model.ScreenSize</li>
+                <li class="list-group-item"><strong>Hệ điều hành:</strong> @Model.OS</li>
+                <li class="list-group-item"><strong>Loại sản phẩm:</strong> @Model.LoaiSanPham?.TenLSP</li>
+                <li class="list-group-item"><strong>Đánh giá:</strong> @(Model.Rating.HasValue ? Model.Rating.Value.ToString("0.0") : "Chưa có")</li>
+                <li class="list-group-item"><strong>Tình trạng:</strong> @(Model.InStock ? "Còn hàng" : "Hết hàng")</li>
+            </ul>
+            <div class="d-flex gap-2">
+                @if (Model.InStock)
+                {
+                    <button id="btnAddToCart" data-id="@Model.Id" class="btn btn-primary"><i class="bi bi-cart-plus"></i> Thêm vào giỏ</button>
+                }
+                <a asp-action="Index" class="btn btn-outline-secondary">Quay lại</a>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h4>Đánh giá sản phẩm</h4>
+            @if (Model.ProductReviews != null && Model.ProductReviews.Any())
+            {
+                <ul class="list-group">
+                    @foreach (var review in Model.ProductReviews)
+                    {
+                        <li class="list-group-item">
+                            <strong>@review.KhachHang?.HoTen</strong> - <span class="text-warning">@review.Rating ★</span><br />
+                            <span>@review.Comment</span>
+                            <div class="text-muted small">@review.ReviewDate.ToString("dd/MM/yyyy")</div>
+                        </li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p class="text-muted">Chưa có đánh giá nào cho sản phẩm này.</p>
+            }
+        </div>
+    </div>
+</div> 
+
+<!-- Toast Bootstrap -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="cartToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Giỏ hàng</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+    </div>
+    <div class="toast-body">
+      Sản phẩm đã được thêm vào giỏ hàng!
+    </div>
+  </div>
+</div>
+
+@Html.AntiForgeryToken()
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#btnAddToCart').off('click').on('click', function (e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+                var token = $('input[name="__RequestVerificationToken"]').val();
+                $.ajax({
+                    url: '/Cart/AddToCart',
+                    type: 'POST',
+                    data: { smartphoneId: id, quantity: 1, __RequestVerificationToken: token },
+                    success: function (res) {
+                        if (res.success) {
+                            showBootstrapToast('Đã thêm sản phẩm vào giỏ hàng!', 'success');
+                            if (res.cartCount !== undefined) {
+                                $('#cartCount').text(res.cartCount);
+                            }
+                        } else {
+                            showBootstrapToast('Thêm vào giỏ hàng thất bại!', 'danger');
+                        }
+                    },
+                    error: function () {
+                        showBootstrapToast('Có lỗi xảy ra khi thêm vào giỏ hàng!', 'danger');
+                    }
+                });
+            });
+        });
+    </script>
+} 

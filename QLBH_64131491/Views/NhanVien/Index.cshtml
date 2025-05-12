@@ -1,0 +1,42 @@
+@model IEnumerable<QLBH_64131491.Models.Model_64131491.NhanVien_64131491>
+@{
+    ViewData["Title"] = "Quản lý nhân viên";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container">
+    <h2 class="mb-4">Quản lý nhân viên</h2>
+    <div class="mb-3 text-end">
+        <a asp-action="Create" class="btn btn-success"><i class="bi bi-plus-circle"></i> Thêm nhân viên</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Mã NV</th>
+                    <th>Họ tên</th>
+                    <th>Email</th>
+                    <th>Số điện thoại</th>
+                    <th>Quyền sử dụng</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.MaNV</td>
+                        <td>@item.HoTen</td>
+                        <td>@item.Email</td>
+                        <td>@item.SoDienThoai</td>
+                        <td>@item.QuyenSuDung</td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.MaNV" class="btn btn-info btn-sm"><i class="bi bi-eye"></i></a>
+                            <a asp-action="Edit" asp-route-id="@item.MaNV" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
+                            <a asp-action="Delete" asp-route-id="@item.MaNV" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div> 

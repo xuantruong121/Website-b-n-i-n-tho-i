@@ -1,0 +1,68 @@
+@model IEnumerable<QLBH_64131491.Models.Model_64131491.Smartphone_64131491>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Quản lý sản phẩm";
+}
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Quản lý sản phẩm</h2>
+        <a asp-action="Create" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Thêm sản phẩm
+        </a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Hình ảnh</th>
+                    <th>Mã SP</th>
+                    <th>Thương hiệu</th>
+                    <th>Model</th>
+                    <th>Giá</th>
+                    <th>Giá KM</th>
+                    <th>Còn hàng</th>
+                    <th>Loại</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-center">
+                            <img src="@Url.Content(item.ImageUrl)" 
+                                 alt="@item.Brand @item.Model" 
+                                 style="width:80px; height:80px; object-fit:contain;"
+                                 onerror="this.src='/images/smartphones/default-smartphone.webp'">
+                        </td>
+                        <td>@item.Id</td>
+                        <td>@item.Brand</td>
+                        <td>@item.Model</td>
+                        <td>@item.Price.ToString("N0") đ</td>
+                        <td>@(item.DiscountPrice.HasValue ? item.DiscountPrice.Value.ToString("N0") + " đ" : "-")</td>
+                        <td>@(item.InStock ? "✔" : "✘")</td>
+                        <td>@item.LoaiSanPham?.TenLSP</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a asp-action="AdminDetails" asp-route-id="@item.Id" class="btn btn-info btn-sm">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                <form asp-action="DeleteConfirmed" asp-route-id="@item.Id" method="post" 
+                                      onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm @item.Brand @item.Model?');" 
+                                      style="display:inline;">
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div> 

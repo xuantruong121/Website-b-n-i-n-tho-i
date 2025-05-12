@@ -1,0 +1,37 @@
+@model QLBH_64131491.Models.Model_64131491.KhachHang_64131491
+@{
+    ViewData["Title"] = "Chỉnh sửa khách hàng";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container">
+    <h2 class="mb-4">Chỉnh sửa khách hàng</h2>
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="MaKH" />
+        <div class="mb-3">
+            <label asp-for="HoTen" class="form-label"></label>
+            <input asp-for="HoTen" class="form-control" required />
+            <span asp-validation-for="HoTen" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label"></label>
+            <input asp-for="Email" class="form-control" readonly />
+        </div>
+        <div class="mb-3">
+            <label asp-for="SoDienThoai" class="form-label"></label>
+            <input asp-for="SoDienThoai" class="form-control" />
+            <span asp-validation-for="SoDienThoai" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="DiaChi" class="form-label"></label>
+            <textarea asp-for="DiaChi" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="DiaChi" class="text-danger"></span>
+        </div>
+        <div class="mt-4 text-end">
+            <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Lưu</button>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} 

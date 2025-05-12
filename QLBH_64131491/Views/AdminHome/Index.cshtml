@@ -1,0 +1,63 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Trang quản trị";
+}
+<div class="container">
+    <h1 class="mb-4">Chào mừng đến với trang quản trị Smartphone Shop</h1>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card text-bg-primary h-100">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-phone"></i> Quản lý sản phẩm</h5>
+                    <p class="card-text">Thêm, sửa, xoá và quản lý thông tin các sản phẩm điện thoại.</p>
+                    <a asp-controller="Smartphone" asp-action="AdminIndex" class="btn btn-light">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-bg-success h-100">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-tags"></i> Quản lý loại sản phẩm</h5>
+                    <p class="card-text">Quản lý các loại sản phẩm điện thoại.</p>
+                    <a asp-controller="LoaiSanPham" asp-action="Index" class="btn btn-light">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-bg-warning h-100">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-people"></i> Quản lý khách hàng</h5>
+                    <p class="card-text">Xem và quản lý thông tin khách hàng.</p>
+                    <a asp-controller="KhachHang" asp-action="Index" class="btn btn-light">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-bg-danger h-100">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-receipt"></i> Quản lý đơn hàng</h5>
+                    <p class="card-text">Xem, duyệt và quản lý các đơn hàng.</p>
+                    <a asp-controller="Order" asp-action="Admin" class="btn btn-light">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-bg-info h-100">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-bar-chart"></i> Thống kê & Báo cáo</h5>
+                    <p class="card-text">Xem báo cáo, thống kê doanh thu, sản phẩm bán chạy...</p>
+                    <a asp-controller="Order" asp-action="Statistics" class="btn btn-light">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-bg-secondary h-100">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-person-badge"></i> Quản lý nhân viên</h5>
+                    <p class="card-text">Thêm, sửa, xoá và quản lý thông tin nhân viên.</p>
+                    <a asp-controller="NhanVien" asp-action="Index" class="btn btn-light">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

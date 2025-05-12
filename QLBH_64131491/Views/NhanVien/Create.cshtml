@@ -1,0 +1,102 @@
+@model QLBH_64131491.Models.Model_64131491.NhanVien_64131491
+@{
+    ViewData["Title"] = "Thêm nhân viên mới";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container">
+    <h2 class="mb-4">Thêm nhân viên mới</h2>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            <ul>
+                @foreach (var modelError in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <li>@modelError.ErrorMessage</li>
+                }
+            </ul>
+        </div>
+    }
+
+    <form asp-action="Create" method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <h4 class="mb-3">Thông tin nhân viên</h4>
+                <div class="mb-3">
+                    <label asp-for="MaNV" class="form-label">Mã nhân viên</label>
+                    <input asp-for="MaNV" class="form-control" required />
+                    <span asp-validation-for="MaNV" class="text-danger"></span>
+                    <div class="form-text">Mã nhân viên phải là duy nhất</div>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="HoTen" class="form-label">Họ tên nhân viên</label>
+                    <input asp-for="HoTen" class="form-control" required />
+                    <span asp-validation-for="HoTen" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="SoDienThoai" class="form-label">Số điện thoại</label>
+                    <input asp-for="SoDienThoai" class="form-control" />
+                    <span asp-validation-for="SoDienThoai" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label">Email</label>
+                    <input asp-for="Email" class="form-control" type="email" required />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                    <div class="form-text">Email này sẽ được sử dụng làm tên đăng nhập</div>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="QuyenSuDung" class="form-label">Quyền sử dụng</label>
+                    <select asp-for="QuyenSuDung" class="form-select">
+                        <option value="Admin">Admin</option>
+                        <option value="Nhân viên bán hàng">Nhân viên bán hàng</option>
+                        <option value="Nhân viên kho">Nhân viên kho</option>
+                    </select>
+                    <span asp-validation-for="QuyenSuDung" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h4 class="mb-3">Thông tin tài khoản</h4>
+                <div class="mb-3">
+                    <label for="MatKhau" class="form-label">Mật khẩu</label>
+                    <input type="password" id="MatKhau" name="MatKhau" class="form-control" required />
+                    <div class="form-text">Mật khẩu phải có ít nhất 6 ký tự</div>
+                </div>
+                <div class="mb-3">
+                    <label for="XacNhanMatKhau" class="form-label">Xác nhận mật khẩu</label>
+                    <input type="password" id="XacNhanMatKhau" name="XacNhanMatKhau" class="form-control" required />
+                    <div class="form-text">Nhập lại mật khẩu để xác nhận</div>
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="RoleAdmin" name="RoleAdmin" value="true" />
+                    <input type="hidden" name="RoleAdmin" value="false" />
+                    <label class="form-check-label" for="RoleAdmin">Quyền Admin</label>
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="IsActive" name="IsActive" value="true" checked />
+                    <input type="hidden" name="IsActive" value="false" />
+                    <label class="form-check-label" for="IsActive">Tài khoản hoạt động</label>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4 text-end">
+            <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Lưu</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        // Kiểm tra password khớp nhau
+        document.querySelector('form').addEventListener('submit', function (e) {
+            var pass = document.getElementById('MatKhau').value;
+            var confirmPass = document.getElementById('XacNhanMatKhau').value;
+            
+            if (pass !== confirmPass) {
+                e.preventDefault();
+                alert('Mật khẩu xác nhận không khớp!');
+            }
+        });
+    </script>
+} 

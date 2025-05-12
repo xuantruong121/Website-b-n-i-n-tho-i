@@ -1,0 +1,83 @@
+@model QLBH_64131491.Models.Model_64131491.Smartphone_64131491
+@{
+    ViewData["Title"] = "Chi tiết sản phẩm (Admin)";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container">
+    <h2 class="mb-4">Chi tiết sản phẩm (Admin)</h2>
+    <div class="row">
+        <div class="col-md-5">
+            @if (Model.ProductImages != null && Model.ProductImages.Any())
+            {
+                <div id="carouselImages" class="carousel slide mb-3" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @for (int i = 0; i < Model.ProductImages.Count; i++)
+                        {
+                            var img = Model.ProductImages.ElementAt(i);
+                            <div class="carousel-item @(i == 0 ? "active" : "")">
+                                <img src="@img.ImageUrl" class="d-block w-100" alt="@Model.Model">
+                            </div>
+                        }
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselImages" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
+            }
+            else
+            {
+                <img src="@Model.ImageUrl" class="img-fluid mb-3" alt="@Model.Model" />
+            }
+        </div>
+        <div class="col-md-7">
+            <dl class="row">
+                <dt class="col-sm-4">Mã SP</dt>
+                <dd class="col-sm-8">@Model.Id</dd>
+                <dt class="col-sm-4">Thương hiệu</dt>
+                <dd class="col-sm-8">@Model.Brand</dd>
+                <dt class="col-sm-4">Model</dt>
+                <dd class="col-sm-8">@Model.Model</dd>
+                <dt class="col-sm-4">Giá</dt>
+                <dd class="col-sm-8">@Model.Price.ToString("N0") đ</dd>
+                <dt class="col-sm-4">Giá khuyến mãi</dt>
+                <dd class="col-sm-8">@(Model.DiscountPrice.HasValue ? Model.DiscountPrice.Value.ToString("N0") + " đ" : "-")</dd>
+                <dt class="col-sm-4">Mô tả</dt>
+                <dd class="col-sm-8">@Model.Description</dd>
+                <dt class="col-sm-4">Màu sắc</dt>
+                <dd class="col-sm-8">@Model.Color</dd>
+                <dt class="col-sm-4">Bộ nhớ</dt>
+                <dd class="col-sm-8">@Model.StorageGB GB</dd>
+                <dt class="col-sm-4">RAM</dt>
+                <dd class="col-sm-8">@Model.RAM</dd>
+                <dt class="col-sm-4">CPU</dt>
+                <dd class="col-sm-8">@Model.Processor</dd>
+                <dt class="col-sm-4">Camera</dt>
+                <dd class="col-sm-8">@Model.Camera</dd>
+                <dt class="col-sm-4">Pin</dt>
+                <dd class="col-sm-8">@Model.Battery</dd>
+                <dt class="col-sm-4">Kích thước màn hình</dt>
+                <dd class="col-sm-8">@Model.ScreenSize</dd>
+                <dt class="col-sm-4">Hệ điều hành</dt>
+                <dd class="col-sm-8">@Model.OS</dd>
+                <dt class="col-sm-4">Ngày phát hành</dt>
+                <dd class="col-sm-8">@Model.ReleaseDate?.ToString("dd/MM/yyyy")</dd>
+                <dt class="col-sm-4">Loại sản phẩm</dt>
+                <dd class="col-sm-8">@Model.LoaiSanPham?.TenLSP</dd>
+                <dt class="col-sm-4">Tình trạng</dt>
+                <dd class="col-sm-8">@(Model.InStock ? "Còn hàng" : "Hết hàng")</dd>
+                <dt class="col-sm-4">Sản phẩm nổi bật</dt>
+                <dd class="col-sm-8">@(Model.Featured ? "Có" : "Không")</dd>
+                <dt class="col-sm-4">Sản phẩm mới</dt>
+                <dd class="col-sm-8">@(Model.IsNew ? "Có" : "Không")</dd>
+                <dt class="col-sm-4">Trạng thái</dt>
+                <dd class="col-sm-8">@(Model.IsActive ? "Đang bán" : "Đã ẩn")</dd>
+            </dl>
+            <div class="mt-4 text-end">
+                <a asp-action="AdminIndex" class="btn btn-secondary">Quay lại</a>
+            </div>
+        </div>
+    </div>
+</div> 

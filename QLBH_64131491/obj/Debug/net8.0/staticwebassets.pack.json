@@ -1,0 +1,349 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\QLBH_64131491.bundle.scp.css",
+      "PackagePath": "staticwebassets\\QLBH_64131491.f1uu6e94hr.bundle.scp.css"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\images\\banner\\iphone.gif",
+      "PackagePath": "staticwebassets\\images\\banner\\iphone.gif"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\images\\news\\news1.jpg",
+      "PackagePath": "staticwebassets\\images\\news\\news1.jpg"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\images\\news\\news2.jpg",
+      "PackagePath": "staticwebassets\\images\\news\\news2.jpg"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\images\\news\\news3.jpg",
+      "PackagePath": "staticwebassets\\images\\news\\news3.jpg"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\images\\slider\\slider1.jpg",
+      "PackagePath": "staticwebassets\\images\\slider\\slider1.jpg"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\images\\slider\\slider2.jpg",
+      "PackagePath": "staticwebassets\\images\\slider\\slider2.jpg"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\images\\slider\\slider3.jpg",
+      "PackagePath": "staticwebassets\\images\\slider\\slider3.jpg"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\images\\smartphones\\iphone-16-pro-max-den-1_23736fcb.webp",
+      "PackagePath": "staticwebassets\\images\\smartphones\\iphone-16-pro-max-den-1_23736fcb.webp"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\images\\smartphones\\iphone15pro_1.jpg",
+      "PackagePath": "staticwebassets\\images\\smartphones\\iphone15pro_1.jpg"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\images\\smartphones\\iphone15pro_2.jpg",
+      "PackagePath": "staticwebassets\\images\\smartphones\\iphone15pro_2.jpg"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\images\\smartphones\\iphone15pro_3.jpg",
+      "PackagePath": "staticwebassets\\images\\smartphones\\iphone15pro_3.jpg"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\images\\smartphones\\iphone16pro.jpg",
+      "PackagePath": "staticwebassets\\images\\smartphones\\iphone16pro.jpg"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\images\\smartphones\\nothing2.jpg",
+      "PackagePath": "staticwebassets\\images\\smartphones\\nothing2.jpg"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\images\\smartphones\\pixel8.jpg",
+      "PackagePath": "staticwebassets\\images\\smartphones\\pixel8.jpg"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\images\\smartphones\\redminote13pro_1.jpg",
+      "PackagePath": "staticwebassets\\images\\smartphones\\redminote13pro_1.jpg"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\images\\smartphones\\redminote13pro_2.jpg",
+      "PackagePath": "staticwebassets\\images\\smartphones\\redminote13pro_2.jpg"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\images\\smartphones\\samsungs24ultra_1.jpg",
+      "PackagePath": "staticwebassets\\images\\smartphones\\samsungs24ultra_1.jpg"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\images\\smartphones\\samsungs24ultra_2.jpg",
+      "PackagePath": "staticwebassets\\images\\smartphones\\samsungs24ultra_2.jpg"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\images\\smartphones\\xiaomi14t.jpg",
+      "PackagePath": "staticwebassets\\images\\smartphones\\xiaomi14t.jpg"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\images\\smartphones\\z-fold6-navy-1_f54808d8.webp",
+      "PackagePath": "staticwebassets\\images\\smartphones\\z-fold6-navy-1_f54808d8.webp"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "D:\\Tài liệu đại học\\project tke web 2\\QLBH_64131491\\QLBH_64131491\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.QLBH_64131491.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.QLBH_64131491.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.QLBH_64131491.props",
+      "PackagePath": "build\\QLBH_64131491.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.QLBH_64131491.props",
+      "PackagePath": "buildMultiTargeting\\QLBH_64131491.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.QLBH_64131491.props",
+      "PackagePath": "buildTransitive\\QLBH_64131491.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

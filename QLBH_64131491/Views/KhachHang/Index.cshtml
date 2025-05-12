@@ -1,0 +1,61 @@
+@model IEnumerable<QLBH_64131491.Models.Model_64131491.KhachHang_64131491>
+@{
+    ViewData["Title"] = "Quản lý khách hàng";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container">
+    <h2 class="mb-4">Quản lý khách hàng</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Mã KH</th>
+                    <th>Họ tên</th>
+                    <th>Email</th>
+                    <th>Số điện thoại</th>
+                    <th>Địa chỉ</th>
+                    <th>Trạng thái</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.MaKH</td>
+                        <td>@item.HoTen</td>
+                        <td>@item.Email</td>
+                        <td>@item.SoDienThoai</td>
+                        <td>@item.DiaChi</td>
+                        <td>
+                            @if (item.TaiKhoan != null && item.TaiKhoan.IsActive)
+                            {
+                                <span class="badge bg-success">Hoạt động</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">Đã khóa</span>
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.MaKH" class="btn btn-info btn-sm"><i class="bi bi-eye"></i></a>
+                            <a asp-action="Edit" asp-route-id="@item.MaKH" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
+                            @if (item.TaiKhoan != null && item.TaiKhoan.IsActive)
+                            {
+                                <form asp-action="Lock" asp-route-id="@item.MaKH" method="post" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger btn-sm" title="Khóa tài khoản"><i class="bi bi-lock"></i></button>
+                                </form>
+                            }
+                            else
+                            {
+                                <form asp-action="Unlock" asp-route-id="@item.MaKH" method="post" style="display:inline;">
+                                    <button type="submit" class="btn btn-success btn-sm" title="Mở khóa tài khoản"><i class="bi bi-unlock"></i></button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div> 

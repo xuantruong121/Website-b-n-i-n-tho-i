@@ -1,0 +1,178 @@
+@model QLBH_64131491.Models.Model_64131491.Order_64131491
+
+@{
+    ViewData["Title"] = "Chi tiết đơn hàng";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Chi tiết đơn hàng #@Model.OrderId</h2>
+        <div>
+            <a asp-action="Admin" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Quay lại
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Thông tin đơn hàng</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+        <div class="col-md-6">
+                            <p><strong>Mã đơn hàng:</strong> @Model.OrderId</p>
+                            <p><strong>Ngày đặt:</strong> @Model.OrderDate.ToString("dd/MM/yyyy HH:mm")</p>
+                            <p><strong>Trạng thái:</strong>
+                @if (Model.IsCompleted)
+                {
+                    <span class="badge bg-success">Hoàn thành</span>
+                }
+                else if (Model.IsCancelled)
+                {
+                    <span class="badge bg-danger">Đã hủy</span>
+                }
+                else if (Model.IsShipped)
+                {
+                    <span class="badge bg-info">Đang giao hàng</span>
+                }
+                else if (Model.IsProcessing)
+                {
+                                    <span class="badge bg-warning">Đang xử lý</span>
+                }
+            </p>
+        </div>
+        <div class="col-md-6">
+                            <p><strong>Phương thức thanh toán:</strong> @Model.PaymentMethod</p>
+                            <p><strong>Đã thanh toán:</strong> @(Model.IsPaid ? "Có" : "Chưa")</p>
+                            <p><strong>Đã giao hàng:</strong> @(Model.IsShipped ? "Có" : "Chưa")</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6>Địa chỉ giao hàng:</h6>
+                        <p class="mb-0">@Model.ShippingAddress</p>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(Model.Notes))
+                    {
+                        <div class="mb-3">
+                            <h6>Ghi chú:</h6>
+                            <p class="mb-0">@Model.Notes</p>
+                        </div>
+                    }
+        </div>
+    </div>
+
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Chi tiết sản phẩm</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Sản phẩm</th>
+                                    <th class="text-end">Đơn giá</th>
+                                    <th class="text-end">Số lượng</th>
+                                    <th class="text-end">Thành tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                                @foreach (var item in Model.OrderDetails)
+                {
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="@item.Smartphone.ImageUrl" alt="@item.Smartphone.Model" class="img-thumbnail me-2" style="width: 50px;">
+                                                <div>
+                                                    <div>@item.Smartphone.Brand @item.Smartphone.Model</div>
+                                                    <small class="text-muted">@item.Smartphone.Color, @item.Smartphone.StorageGB GB</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-end">@item.UnitPrice.ToString("#,##0") đ</td>
+                                        <td class="text-end">@item.Quantity</td>
+                                        <td class="text-end">@((item.UnitPrice * item.Quantity).ToString("#,##0")) đ</td>
+                    </tr>
+                }
+            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3" class="text-end"><strong>Tạm tính:</strong></td>
+                                    <td class="text-end">@(Model.TotalAmount.HasValue ? Model.TotalAmount.Value.ToString("#,##0") : "0") đ</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="text-end"><strong>Giảm giá:</strong></td>
+                                    <td class="text-end">@Model.Discount.ToString("#,##0") đ</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="text-end"><strong>Thành tiền:</strong></td>
+                                    <td class="text-end"><strong>@(Model.FinalAmount.HasValue ? Model.FinalAmount.Value.ToString("#,##0") : "0") đ</strong></td>
+                                </tr>
+                            </tfoot>
+        </table>
+    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Thông tin khách hàng</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Họ tên:</strong> @Model.KhachHang?.HoTen</p>
+                    <p><strong>Email:</strong> @Model.KhachHang?.Email</p>
+                    <p><strong>Số điện thoại:</strong> @Model.KhachHang?.SoDienThoai</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0">Cập nhật trạng thái</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="UpdateStatus" method="post">
+                        <input type="hidden" name="orderId" value="@Model.OrderId" />
+                        <div class="mb-3">
+                            <label class="form-label">Trạng thái đơn hàng</label>
+                            <select name="status" class="form-select">
+                                @if (Model.IsProcessing) {
+                                    <option value="processing" selected>Đang xử lý</option>
+                                } else {
+                                    <option value="processing">Đang xử lý</option>
+                                }
+                                @if (Model.IsShipped) {
+                                    <option value="shipped" selected>Đang giao hàng</option>
+                                } else {
+                                    <option value="shipped">Đang giao hàng</option>
+                                }
+                                @if (Model.IsCompleted) {
+                                    <option value="completed" selected>Hoàn thành</option>
+                                } else {
+                                    <option value="completed">Hoàn thành</option>
+                                }
+                                @if (Model.IsCancelled) {
+                                    <option value="cancelled" selected>Đã hủy</option>
+                                } else {
+                                    <option value="cancelled">Đã hủy</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ghi chú</label>
+                            <textarea name="notes" class="form-control" rows="3">@Model.Notes</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Cập nhật</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

@@ -1,0 +1,35 @@
+@model IEnumerable<QLBH_64131491.Models.Model_64131491.LoaiSanPham_64131491>
+@{
+    ViewData["Title"] = "Quản lý loại sản phẩm";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container">
+    <h2 class="mb-4">Quản lý loại sản phẩm</h2>
+    <div class="mb-3 text-end">
+        <a asp-action="Create" class="btn btn-success"><i class="bi bi-plus-circle"></i> Thêm loại sản phẩm</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Mã loại</th>
+                    <th>Tên loại sản phẩm</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.MaLSP</td>
+                        <td>@item.TenLSP</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.MaLSP" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i> Sửa</a>
+                            <a asp-action="Delete" asp-route-id="@item.MaLSP" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Xóa</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div> 

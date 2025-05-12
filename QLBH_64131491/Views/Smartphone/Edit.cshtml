@@ -1,0 +1,238 @@
+@model QLBH_64131491.Models.Model_64131491.Smartphone_64131491
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Chỉnh sửa sản phẩm";
+}
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Chỉnh sửa sản phẩm</h2>
+        <a asp-action="AdminIndex" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Quay lại
+        </a>
+    </div>
+    
+    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="All" class="alert alert-danger d-none" id="validation-summary"></div>
+        <input type="hidden" asp-for="Id" />
+        
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label asp-for="Brand" class="form-label">Thương hiệu</label>
+                    <input asp-for="Brand" class="form-control" required />
+                    <span asp-validation-for="Brand" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Model" class="form-label">Model</label>
+                    <input asp-for="Model" class="form-control" required />
+                    <span asp-validation-for="Model" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Price" class="form-label">Giá</label>
+                    <input asp-for="Price" class="form-control" required />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="DiscountPrice" class="form-label">Giá khuyến mãi</label>
+                    <input asp-for="DiscountPrice" class="form-control" />
+                    <span asp-validation-for="DiscountPrice" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label">Mô tả</label>
+                    <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label">Hình ảnh sản phẩm</label>
+                    <input type="hidden" asp-for="ImageUrl" />
+                    
+                    <div class="custom-file-upload mb-2">
+                        <div class="image-container">
+                            <img src="@Url.Content(Model.ImageUrl)" id="imagePreview" 
+                                 style="max-height: 120px; max-width: 100%; object-fit: contain;" 
+                                 alt="@Model.Brand @Model.Model" 
+                                 onerror="this.onerror=null; this.style.display='none'; document.getElementById('noImageText').style.display='block';" />
+                            <div id="noImageText" class="text-center text-muted" style="display: none;">
+                                <i class="bi bi-camera" style="font-size: 48px;"></i>
+                                <p>Không có hình ảnh</p>
+                            </div>
+                        </div>
+                        
+                        <div class="file-input-container mt-2">
+                            <label for="imageInput" class="btn btn-outline-primary w-100">
+                                <i class="bi bi-upload"></i> Chọn hình ảnh
+                            </label>
+                            <input type="file" name="image" id="imageInput" class="hidden-file-input" accept="image/*" style="display: none;" />
+                        </div>
+                        
+                        <div class="text-center mt-2">
+                            <small class="form-text text-muted">Đường dẫn: @Model.ImageUrl</small>
+                        </div>
+                        
+                        <button type="button" class="btn btn-sm btn-outline-secondary w-100 mt-2" id="clearImageBtn">
+                            <i class="bi bi-x-circle"></i> Hủy chọn
+                        </button>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="MaLSP" class="form-label">Loại sản phẩm</label>
+                    <select asp-for="MaLSP" class="form-select" asp-items="@(new SelectList(ViewBag.LoaiSanPhams, "MaLSP", "TenLSP"))">
+                        <option value="">-- Chọn loại sản phẩm --</option>
+                    </select>
+                    <span asp-validation-for="MaLSP" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label asp-for="Color" class="form-label">Màu sắc</label>
+                    <input asp-for="Color" class="form-control" />
+                    <span asp-validation-for="Color" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="StorageGB" class="form-label">Bộ nhớ (GB)</label>
+                    <input asp-for="StorageGB" class="form-control" type="number" />
+                    <span asp-validation-for="StorageGB" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="RAM" class="form-label">RAM</label>
+                    <input asp-for="RAM" class="form-control" />
+                    <span asp-validation-for="RAM" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Processor" class="form-label">CPU</label>
+                    <input asp-for="Processor" class="form-control" />
+                    <span asp-validation-for="Processor" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Camera" class="form-label">Camera</label>
+                    <input asp-for="Camera" class="form-control" />
+                    <span asp-validation-for="Camera" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Battery" class="form-label">Pin</label>
+                    <input asp-for="Battery" class="form-control" />
+                    <span asp-validation-for="Battery" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="ScreenSize" class="form-label">Màn hình</label>
+                    <input asp-for="ScreenSize" class="form-control" />
+                    <span asp-validation-for="ScreenSize" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="OS" class="form-label">Hệ điều hành</label>
+                    <input asp-for="OS" class="form-control" />
+                    <span asp-validation-for="OS" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="ReleaseDate" class="form-label">Ngày phát hành</label>
+                    <input asp-for="ReleaseDate" class="form-control" type="date" />
+                    <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Quantity" class="form-label">Số lượng</label>
+                    <input asp-for="Quantity" class="form-control" type="number" min="0" />
+                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mb-3">
+            <div class="col-md-3">
+                <div class="form-check">
+                    <input asp-for="InStock" class="form-check-input" value="true" />
+                    <input name="InStock" type="hidden" value="false" />
+                    <label asp-for="InStock" class="form-check-label">Còn hàng</label>
+                    <span asp-validation-for="InStock" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-check">
+                    <input asp-for="Featured" class="form-check-input" value="true" />
+                    <input name="Featured" type="hidden" value="false" />
+                    <label asp-for="Featured" class="form-check-label">Sản phẩm nổi bật</label>
+                    <span asp-validation-for="Featured" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-check">
+                    <input asp-for="IsNew" class="form-check-input" value="true" />
+                    <input name="IsNew" type="hidden" value="false" />
+                    <label asp-for="IsNew" class="form-check-label">Sản phẩm mới</label>
+                    <span asp-validation-for="IsNew" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-check">
+                    <input asp-for="IsActive" class="form-check-input" value="true" />
+                    <input name="IsActive" type="hidden" value="false" />
+                    <label asp-for="IsActive" class="form-check-label">Hiển thị sản phẩm</label>
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-4 text-end">
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-save"></i> Lưu thay đổi
+            </button>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            // Kiểm tra hình ảnh ban đầu
+            function checkInitialImage() {
+                var imgSrc = $('#imagePreview').attr('src');
+                if (!imgSrc || imgSrc === '') {
+                    $('#imagePreview').css('display', 'none');
+                    $('#noImageText').css('display', 'block');
+                }
+            }
+            
+            // Kiểm tra ảnh khi trang tải xong
+            checkInitialImage();
+            
+            // Xử lý lỗi ảnh
+            $('#imagePreview').on('error', function() {
+                $(this).css('display', 'none');
+                $('#noImageText').css('display', 'block');
+            });
+            
+            // Hiển thị validation summary nếu có lỗi
+            if ($('#validation-summary').find('ul li').length > 0) {
+                $('#validation-summary').removeClass('d-none');
+            }
+            
+            // Hiển thị preview ảnh khi chọn file mới
+            $('#imageInput').change(function() {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#imagePreview').attr('src', e.target.result);
+                        $('#imagePreview').css('display', 'block');
+                        $('#noImageText').css('display', 'none');
+                    };
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+            
+            // Xử lý nút hủy chọn
+            $('#clearImageBtn').click(function() {
+                $('#imageInput').val(''); // Xóa file đã chọn
+                
+                // Khôi phục lại ảnh ban đầu nếu có
+                var originalImage = '@Url.Content(Model.ImageUrl)';
+                if (originalImage && originalImage !== '') {
+                    $('#imagePreview').attr('src', originalImage);
+                    $('#imagePreview').css('display', 'block');
+                    $('#noImageText').css('display', 'none');
+                } else {
+                    $('#imagePreview').css('display', 'none');
+                    $('#noImageText').css('display', 'block');
+                }
+            });
+        });
+    </script>
+} 

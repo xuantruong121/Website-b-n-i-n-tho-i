@@ -1,0 +1,191 @@
+@model QLBH_64131491.Models.Model_64131491.OrderStatistics_64131491
+@{
+    ViewData["Title"] = "Thống kê đơn hàng";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <h2 class="mb-4">Thống kê đơn hàng</h2>
+
+    <div class="row">
+        <!-- Tổng quan -->
+        <div class="col-md-3 mb-4">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Tổng đơn hàng</h5>
+                    <h2 class="card-text">@Model.TotalOrders</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Tổng doanh thu</h5>
+                    <h2 class="card-text">@Model.TotalRevenue.ToString("N0") đ</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card bg-warning text-dark">
+                <div class="card-body">
+                    <h5 class="card-title">Đơn hàng đang xử lý</h5>
+                    <h2 class="card-text">@Model.PendingOrders</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Đơn hàng hoàn thành</h5>
+                    <h2 class="card-text">@Model.CompletedOrders</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Biểu đồ doanh thu theo tháng -->
+        <div class="col-md-8 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Doanh thu theo tháng</h5>
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sản phẩm bán chạy -->
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Sản phẩm bán chạy</h5>
+                    <div class="list-group">
+                        @foreach (var product in Model.TopSellingProducts)
+                        {
+                            <div class="list-group-item">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-1">@product.Brand @product.Model</h6>
+                                    <small>@product.TotalSold sản phẩm</small>
+                                </div>
+                                <small class="text-muted">@product.TotalRevenue.ToString("N0") đ</small>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Thống kê trạng thái đơn hàng -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Trạng thái đơn hàng</h5>
+                    <canvas id="orderStatusChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thống kê phương thức thanh toán -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Phương thức thanh toán</h5>
+                    <canvas id="paymentMethodChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a asp-action="Admin" class="btn btn-outline-primary">
+            <i class="bi bi-arrow-left"></i> Quay lại quản lý đơn hàng
+        </a>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Dữ liệu doanh thu theo tháng
+        const revenueData = @Html.Raw(Json.Serialize(Model.MonthlyRevenue));
+        const revenueLabels = Object.keys(revenueData);
+        const revenueValues = Object.values(revenueData);
+
+        // Biểu đồ doanh thu
+        new Chart(document.getElementById('revenueChart'), {
+            type: 'line',
+            data: {
+                labels: revenueLabels,
+                datasets: [{
+                    label: 'Doanh thu (VNĐ)',
+                    data: revenueValues,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value.toLocaleString('vi-VN') + ' đ';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Biểu đồ trạng thái đơn hàng
+        new Chart(document.getElementById('orderStatusChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Đang xử lý', 'Đang giao hàng', 'Hoàn thành', 'Đã hủy'],
+                datasets: [{
+                    data: [
+                        @Model.PendingOrders,
+                        @Model.ShippedOrders,
+                        @Model.CompletedOrders,
+                        @Model.CancelledOrders
+                    ],
+                    backgroundColor: [
+                        '#ffc107',
+                        '#17a2b8',
+                        '#28a745',
+                        '#dc3545'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+        // Biểu đồ phương thức thanh toán
+        new Chart(document.getElementById('paymentMethodChart'), {
+            type: 'pie',
+            data: {
+                labels: ['Tiền mặt', 'Chuyển khoản', 'Thẻ tín dụng'],
+                datasets: [{
+                    data: [
+                        @Model.CashPaymentCount,
+                        @Model.BankTransferCount,
+                        @Model.CreditCardCount
+                    ],
+                    backgroundColor: [
+                        '#28a745',
+                        '#17a2b8',
+                        '#6f42c1'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+    </script>
+} 

@@ -1,0 +1,30 @@
+@model QLBH_64131491.Models.Model_64131491.Smartphone_64131491
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Xoá sản phẩm";
+}
+<div class="container">
+    <h2 class="mb-4 text-danger">Xác nhận xoá sản phẩm</h2>
+    <div class="alert alert-warning">
+        <strong>Bạn có chắc chắn muốn xoá sản phẩm sau?</strong>
+    </div>
+    <dl class="row">
+        <dt class="col-sm-3">Mã SP</dt>
+        <dd class="col-sm-9">@Model.Id</dd>
+        <dt class="col-sm-3">Thương hiệu</dt>
+        <dd class="col-sm-9">@Model.Brand</dd>
+        <dt class="col-sm-3">Model</dt>
+        <dd class="col-sm-9">@Model.Model</dd>
+        <dt class="col-sm-3">Giá</dt>
+        <dd class="col-sm-9">@Model.Price.ToString("N0") đ</dd>
+        <dt class="col-sm-3">Loại</dt>
+        <dd class="col-sm-9">@Model.LoaiSanPham?.TenLSP</dd>
+    </dl>
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+        <div class="mt-4 text-end">
+            <a asp-action="AdminIndex" class="btn btn-secondary">Huỷ</a>
+            <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i> Xoá</button>
+        </div>
+    </form>
+</div> 

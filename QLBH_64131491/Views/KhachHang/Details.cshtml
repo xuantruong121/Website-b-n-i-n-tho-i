@@ -1,0 +1,34 @@
+@model QLBH_64131491.Models.Model_64131491.KhachHang_64131491
+@{
+    ViewData["Title"] = "Chi tiết khách hàng";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container">
+    <h2 class="mb-4">Chi tiết khách hàng</h2>
+    <dl class="row">
+        <dt class="col-sm-3">Mã khách hàng</dt>
+        <dd class="col-sm-9">@Model.MaKH</dd>
+        <dt class="col-sm-3">Họ tên</dt>
+        <dd class="col-sm-9">@Model.HoTen</dd>
+        <dt class="col-sm-3">Email</dt>
+        <dd class="col-sm-9">@Model.Email</dd>
+        <dt class="col-sm-3">Số điện thoại</dt>
+        <dd class="col-sm-9">@Model.SoDienThoai</dd>
+        <dt class="col-sm-3">Địa chỉ</dt>
+        <dd class="col-sm-9">@Model.DiaChi</dd>
+        <dt class="col-sm-3">Trạng thái</dt>
+        <dd class="col-sm-9">
+            @if (Model.TaiKhoan != null && Model.TaiKhoan.IsActive)
+            {
+                <span class="badge bg-success">Hoạt động</span>
+            }
+            else
+            {
+                <span class="badge bg-danger">Đã khóa</span>
+            }
+        </dd>
+    </dl>
+    <div class="mt-4 text-end">
+        <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+    </div>
+</div> 

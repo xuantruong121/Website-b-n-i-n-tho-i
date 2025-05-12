@@ -1,0 +1,27 @@
+@model QLBH_64131491.Models.Model_64131491.LoaiSanPham_64131491
+@{
+    ViewData["Title"] = "Chỉnh sửa loại sản phẩm";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container">
+    <h2 class="mb-4">Chỉnh sửa loại sản phẩm</h2>
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="MaLSP" />
+        <div class="mb-3">
+            <label asp-for="MaLSP" class="form-label"></label>
+            <input asp-for="MaLSP" class="form-control" readonly />
+        </div>
+        <div class="mb-3">
+            <label asp-for="TenLSP" class="form-label"></label>
+            <input asp-for="TenLSP" class="form-control" required />
+            <span asp-validation-for="TenLSP" class="text-danger"></span>
+        </div>
+        <div class="mt-4 text-end">
+            <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Lưu</button>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} 

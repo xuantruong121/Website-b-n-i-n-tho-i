@@ -1,0 +1,66 @@
+@model IEnumerable<QLBH_64131491.Models.Model_64131491.Order_64131491>
+
+@{
+    ViewData["Title"] = "Đơn hàng của tôi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2 class="mb-4">Đơn hàng của tôi</h2>
+
+    @if (Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Mã đơn hàng</th>
+                        <th>Ngày đặt</th>
+                        <th>Trạng thái</th>
+                        <th>Thành tiền</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.OrderId</td>
+                            <td>@item.OrderDate.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td>
+                                @if (item.IsCompleted)
+                                {
+                                    <span class="badge bg-success">Hoàn thành</span>
+                                }
+                                else if (item.IsCancelled)
+                                {
+                                    <span class="badge bg-danger">Đã hủy</span>
+                                }
+                                else if (item.IsShipped)
+                                {
+                                    <span class="badge bg-info">Đang giao hàng</span>
+                                }
+                                else if (item.IsProcessing)
+                                {
+                                    <span class="badge bg-warning">Đang xử lý</span>
+                                }
+                            </td>
+                            <td>@(item.FinalAmount?.ToString("#,##0") ?? "0") đ</td>
+                            <td>
+                                <a asp-action="Details" asp-route-id="@item.OrderId" class="btn btn-info btn-sm">
+                                    <i class="bi bi-eye"></i> Xem chi tiết
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            Bạn chưa có đơn hàng nào. <a asp-controller="Home" asp-action="Index">Tiếp tục mua sắm</a>
+        </div>
+    }
+</div> 
