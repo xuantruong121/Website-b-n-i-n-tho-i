@@ -308,4 +308,3 @@ D:\Tài liệu đại học\project tke web 2\QLBH_64131491\QLBH_64131491\obj\De
 D:\Tài liệu đại học\project tke web 2\QLBH_64131491\QLBH_64131491\obj\Debug\net8.0\QLBH_64131491.pdb
 D:\Tài liệu đại học\project tke web 2\QLBH_64131491\QLBH_64131491\obj\Debug\net8.0\QLBH_64131491.genruntimeconfig.cache
 D:\Tài liệu đại học\project tke web 2\QLBH_64131491\QLBH_64131491\obj\Debug\net8.0\ref\QLBH_64131491.dll
-D:\Tài liệu đại học\project tke web 2\QLBH_64131491\QLBH_64131491\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

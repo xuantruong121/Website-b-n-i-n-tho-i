@@ -36,7 +36,7 @@
                                 </div>
                             </td>
                             <td>
-                                @if (item.Smartphone.DiscountPrice.HasValue)
+                                @if (item.Smartphone.DiscountPrice.HasValue && item.Smartphone.DiscountPrice.Value > 0 && item.Smartphone.DiscountPrice.Value < item.Smartphone.Price)
                                 {
                                     <span class="price">@item.Smartphone.DiscountPrice.Value.ToString("N0") đ</span>
                                     <span class="original-price">@item.Smartphone.Price.ToString("N0") đ</span>
@@ -55,7 +55,15 @@
                             </td>
                             <td>
                                 @{
-                                    var price = item.Smartphone.DiscountPrice ?? item.Smartphone.Price;
+                                    decimal price;
+                                    if (item.Smartphone.DiscountPrice.HasValue && item.Smartphone.DiscountPrice.Value > 0 && item.Smartphone.DiscountPrice.Value < item.Smartphone.Price)
+                                    {
+                                        price = item.Smartphone.DiscountPrice.Value;
+                                    }
+                                    else
+                                    {
+                                        price = item.Smartphone.Price;
+                                    }
                                     var total = price * item.Quantity;
                                 }
                                 <span class="price">@total.ToString("N0") đ</span>
@@ -73,7 +81,20 @@
                         <td colspan="3" class="text-end"><strong>Tổng cộng:</strong></td>
                         <td>
                             @{
-                                var totalAmount = Model.Sum(item => (item.Smartphone.DiscountPrice ?? item.Smartphone.Price) * item.Quantity);
+                                decimal totalAmount = 0;
+                                foreach (var item in Model)
+                                {
+                                    decimal itemPrice;
+                                    if (item.Smartphone.DiscountPrice.HasValue && item.Smartphone.DiscountPrice.Value > 0 && item.Smartphone.DiscountPrice.Value < item.Smartphone.Price)
+                                    {
+                                        itemPrice = item.Smartphone.DiscountPrice.Value;
+                                    }
+                                    else
+                                    {
+                                        itemPrice = item.Smartphone.Price;
+                                    }
+                                    totalAmount += itemPrice * item.Quantity;
+                                }
                             }
                             <span class="price">@totalAmount.ToString("N0") đ</span>
                         </td>

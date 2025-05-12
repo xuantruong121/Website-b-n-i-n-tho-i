@@ -28,6 +28,16 @@ namespace QLBH_64131491.Controllers
                 .Where(c => c.MaKH == currentUserId)
                 .ToListAsync();
 
+            // Reload smartphone data to ensure all properties are properly loaded
+            foreach (var item in cartItems)
+            {
+                if (item.Smartphone != null)
+                {
+                    // Explicitly load the full smartphone data from the database
+                    item.Smartphone = await _context.Smartphones.FindAsync(item.SmartphoneId);
+                }
+            }
+
             return View(cartItems);
         }
 
@@ -51,6 +61,20 @@ namespace QLBH_64131491.Controllers
 
             try
             {
+                // Fetch the smartphone with full details to ensure prices are correct
+                var smartphone = await _context.Smartphones
+                    .FirstOrDefaultAsync(s => s.Id == smartphoneId);
+                
+                if (smartphone == null)
+                {
+                    return NotFound("Sản phẩm không tồn tại");
+                }
+                
+                if (quantity > smartphone.Quantity)
+                {
+                    return BadRequest($"Số lượng yêu cầu vượt quá số lượng trong kho ({smartphone.Quantity})");
+                }
+                
                 var existingCartItem = await _context.Cart
                     .FirstOrDefaultAsync(c => c.MaKH == userId && c.SmartphoneId == smartphoneId);
 
@@ -87,10 +111,27 @@ namespace QLBH_64131491.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateQuantity(int cartId, int quantity)
         {
-            var cartItem = await _context.Cart.FindAsync(cartId);
+            var cartItem = await _context.Cart
+                .Include(c => c.Smartphone)
+                .FirstOrDefaultAsync(c => c.CartId == cartId);
+
             if (cartItem == null)
             {
                 return NotFound();
+            }
+
+            // Reload smartphone data to ensure we have current inventory information
+            var smartphone = await _context.Smartphones.FindAsync(cartItem.SmartphoneId);
+            if (smartphone == null)
+            {
+                return NotFound("Sản phẩm không tồn tại");
+            }
+
+            // Check if the requested quantity is available
+            if (quantity > smartphone.Quantity)
+            {
+                TempData["Error"] = $"Số lượng yêu cầu ({quantity}) vượt quá số lượng trong kho ({smartphone.Quantity})";
+                return RedirectToAction(nameof(Index));
             }
 
             if (quantity <= 0)
@@ -139,8 +180,43 @@ namespace QLBH_64131491.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
+            // Reload smartphone data to ensure all properties are properly loaded
+            foreach (var item in cartItems)
+            {
+                if (item.Smartphone != null)
+                {
+                    // Explicitly load the full smartphone data from the database
+                    item.Smartphone = await _context.Smartphones.FindAsync(item.SmartphoneId);
+                }
+            }
+
             // Lấy thông tin khách hàng
             var khachHang = await _context.KhachHangs.FirstOrDefaultAsync(kh => kh.MaKH == currentUserId);
+
+            // Calculate correct amounts based on the fixed pricing logic
+            decimal totalOriginalAmount = 0;
+            decimal totalFinalAmount = 0;
+            
+            foreach (var item in cartItems)
+            {
+                var originalPrice = item.Smartphone.Price;
+                decimal finalPrice;
+                
+                // Only use discount price if it is valid (greater than 0 and less than original price)
+                if (item.Smartphone.DiscountPrice.HasValue && 
+                    item.Smartphone.DiscountPrice.Value > 0 && 
+                    item.Smartphone.DiscountPrice.Value < originalPrice)
+                {
+                    finalPrice = item.Smartphone.DiscountPrice.Value;
+                }
+                else
+                {
+                    finalPrice = originalPrice;
+                }
+                
+                totalOriginalAmount += originalPrice * item.Quantity;
+                totalFinalAmount += finalPrice * item.Quantity;
+            }
 
             var order = new Order_64131491
             {
@@ -148,11 +224,15 @@ namespace QLBH_64131491.Controllers
                 MaKH = currentUserId,
                 OrderDate = System.DateTime.Now,
                 IsProcessing = true,
-                TotalAmount = cartItems.Sum(c => c.Smartphone.Price * c.Quantity),
-                FinalAmount = cartItems.Sum(c => (c.Smartphone.DiscountPrice ?? c.Smartphone.Price) * c.Quantity),
+                TotalAmount = totalOriginalAmount,
+                FinalAmount = totalFinalAmount,
+                Discount = totalOriginalAmount - totalFinalAmount,
                 KhachHang = khachHang,
                 ShippingAddress = khachHang?.DiaChi
             };
+
+            // Pass cart items to the view
+            ViewBag.CartItems = cartItems;
 
             return View(order);
         }
@@ -186,9 +266,36 @@ namespace QLBH_64131491.Controllers
             order.IsShipped = false;
             order.IsCompleted = false;
             order.IsCancelled = false;
-            order.TotalAmount = cartItems.Sum(c => c.Smartphone.Price * c.Quantity);
-            order.FinalAmount = cartItems.Sum(c => (c.Smartphone.DiscountPrice ?? c.Smartphone.Price) * c.Quantity);
-            order.Discount = (order.TotalAmount ?? 0) - (order.FinalAmount ?? 0);
+            
+            // Calculate total amounts correctly
+            decimal totalOriginalAmount = 0;
+            decimal totalFinalAmount = 0;
+            
+            foreach (var item in cartItems)
+            {
+                var originalPrice = item.Smartphone.Price;
+                decimal finalPrice;
+                
+                // Only use discount price if it is valid (greater than 0 and less than original price)
+                if (item.Smartphone.DiscountPrice.HasValue && 
+                    item.Smartphone.DiscountPrice.Value > 0 && 
+                    item.Smartphone.DiscountPrice.Value < originalPrice)
+                {
+                    finalPrice = item.Smartphone.DiscountPrice.Value;
+                }
+                else
+                {
+                    finalPrice = originalPrice;
+                }
+                
+                totalOriginalAmount += originalPrice * item.Quantity;
+                totalFinalAmount += finalPrice * item.Quantity;
+            }
+            
+            // Assign nullable decimal values
+            order.TotalAmount = totalOriginalAmount;
+            order.FinalAmount = totalFinalAmount;
+            order.Discount = totalOriginalAmount - totalFinalAmount;
 
             if (string.IsNullOrWhiteSpace(order.ShippingAddress) || string.IsNullOrWhiteSpace(order.PaymentMethod))
             {
@@ -200,18 +307,40 @@ namespace QLBH_64131491.Controllers
 
             foreach (var cartItem in cartItems)
             {
+                // Ensure we have the latest smartphone data
+                var smartphone = await _context.Smartphones.FindAsync(cartItem.SmartphoneId);
+                if (smartphone == null) continue;
+                
+                // Calculate discount amount safely
+                decimal originalPrice = smartphone.Price;
+                decimal discountedPrice;
+                
+                // Only use discount price if it is valid (greater than 0 and less than original price)
+                if (smartphone.DiscountPrice.HasValue && 
+                    smartphone.DiscountPrice.Value > 0 && 
+                    smartphone.DiscountPrice.Value < originalPrice)
+                {
+                    discountedPrice = smartphone.DiscountPrice.Value;
+                }
+                else
+                {
+                    discountedPrice = originalPrice;
+                }
+                
+                decimal discountAmount = originalPrice - discountedPrice;
+                
                 var orderDetail = new OrderDetail_64131491
                 {
                     OrderId = order.OrderId,
                     SmartphoneId = cartItem.SmartphoneId,
                     Quantity = cartItem.Quantity,
-                    UnitPrice = cartItem.Smartphone.Price,
-                    Discount = cartItem.Smartphone.Price - (cartItem.Smartphone.DiscountPrice ?? cartItem.Smartphone.Price)
+                    UnitPrice = originalPrice,
+                    Discount = discountAmount
                 };
                 _context.OrderDetails.Add(orderDetail);
 
                 // Update product quantity
-                cartItem.Smartphone.Quantity -= cartItem.Quantity;
+                smartphone.Quantity -= cartItem.Quantity;
             }
 
             // Clear the cart

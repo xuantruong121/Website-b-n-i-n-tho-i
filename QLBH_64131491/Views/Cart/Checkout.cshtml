@@ -3,6 +3,39 @@
 @{
     ViewData["Title"] = "Thanh toán";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    
+    // Get cart items to display in the checkout
+    var cartItems = ViewBag.CartItems as IEnumerable<QLBH_64131491.Models.Model_64131491.Cart_64131491>;
+    
+    // Calculate correct prices
+    decimal totalOriginalPrice = 0;
+    decimal totalFinalPrice = 0;
+    decimal totalDiscount = 0;
+    
+    if (cartItems != null)
+    {
+        foreach (var item in cartItems)
+        {
+            decimal originalPrice = item.Smartphone.Price;
+            decimal finalPrice;
+            
+            if (item.Smartphone.DiscountPrice.HasValue && 
+                item.Smartphone.DiscountPrice.Value > 0 && 
+                item.Smartphone.DiscountPrice.Value < originalPrice)
+            {
+                finalPrice = item.Smartphone.DiscountPrice.Value;
+            }
+            else
+            {
+                finalPrice = originalPrice;
+            }
+            
+            totalOriginalPrice += originalPrice * item.Quantity;
+            totalFinalPrice += finalPrice * item.Quantity;
+        }
+        
+        totalDiscount = totalOriginalPrice - totalFinalPrice;
+    }
 }
 
 <div class="container">
@@ -55,15 +88,15 @@
                             <tbody>
                                 <tr>
                                     <td>Tạm tính:</td>
-                                    <td class="text-end">@(Model.TotalAmount?.ToString("#,##0") ?? "0") đ</td>
+                                    <td class="text-end">@totalOriginalPrice.ToString("#,##0") đ</td>
                                 </tr>
                                 <tr>
                                     <td>Giảm giá:</td>
-                                    <td class="text-end">@Model.Discount.ToString("#,##0") đ</td>
+                                    <td class="text-end">@totalDiscount.ToString("#,##0") đ</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Thành tiền:</strong></td>
-                                    <td class="text-end"><strong>@(Model.FinalAmount?.ToString("#,##0") ?? "0") đ</strong></td>
+                                    <td class="text-end"><strong>@totalFinalPrice.ToString("#,##0") đ</strong></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -81,15 +114,32 @@
                                 <tr>
                                     <th>Sản phẩm</th>
                                     <th class="text-end">Số lượng</th>
+                                    <th class="text-end">Giá</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in Model.OrderDetails)
+                                @if (cartItems != null)
                                 {
-                                    <tr>
-                                        <td>@item.Smartphone.Brand @item.Smartphone.Model</td>
-                                        <td class="text-end">@item.Quantity</td>
-                                    </tr>
+                                    foreach (var item in cartItems)
+                                    {
+                                        decimal itemPrice;
+                                        if (item.Smartphone.DiscountPrice.HasValue && 
+                                            item.Smartphone.DiscountPrice.Value > 0 && 
+                                            item.Smartphone.DiscountPrice.Value < item.Smartphone.Price)
+                                        {
+                                            itemPrice = item.Smartphone.DiscountPrice.Value;
+                                        }
+                                        else
+                                        {
+                                            itemPrice = item.Smartphone.Price;
+                                        }
+                                        
+                                        <tr>
+                                            <td>@item.Smartphone.Brand @item.Smartphone.Model</td>
+                                            <td class="text-end">@item.Quantity</td>
+                                            <td class="text-end">@((itemPrice * item.Quantity).ToString("#,##0")) đ</td>
+                                        </tr>
+                                    }
                                 }
                             </tbody>
                         </table>
